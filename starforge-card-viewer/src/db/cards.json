@@ -1,0 +1,109 @@
+[
+  {
+    "name": "Starfighter",
+    "type": "Military Unit",
+    "cost": {"Energy": 3, "Metals": 2},
+    "tags": ["Scout Pioneers", "Fleet"],
+    "effect_text": "Deploy to a fleet. Attacks first in combat.",
+    "flavor_text": "Swift and deadly, these ships scout the void.",
+    "stats": {"Attack": 3, "Defense": 3},
+    "power_rating": 3,
+    "image": "/starfighter.jpg"
+  },
+  {
+    "name": "Plasma Cannon",
+    "type": "Action",
+    "cost": {"Energy": 4},
+    "tags": ["Warrior Clans", "Weapon"],
+    "effect_text": "Deal 4 damage to a single enemy unit in combat. Discard after use.",
+    "flavor_text": "A searing blast that carves through armor.",
+    "stats": null,
+    "power_rating": 4,
+    "image": "/plasmaCanon.jpg"
+  },
+  {
+    "name": "Shield Generator",
+    "type": "Upgrade",
+    "cost": {"Metals": 5, "Data": 2},
+    "tags": ["Tech Innovators", "Defense"],
+    "effect_text": "Attached fleet gains +2 Defense. Permanent until destroyed.",
+    "flavor_text": "A bulwark against the galaxy's perils.",
+    "stats": null,
+    "power_rating": 3,
+    "image": "/shieldGenerator.jpg"
+  },
+  {
+    "name": "Void Titan",
+    "type": "Military Unit",
+    "cost": {"Energy": 7, "Metals": 4},
+    "tags": ["Hybrid Nomads", "Elite"],
+    "effect_text": "Deploy to a fleet. Cannot be blocked by units with Defense 3 or less.",
+    "flavor_text": "A colossus born of the void's fury.",
+    "stats": {"Attack": 6, "Defense": 6},
+    "power_rating": 5,
+    "image": "/voidTitan.jpg"
+  },
+  {
+    "name": "Trade Route",
+    "type": "Event",
+    "cost": {"Organics": 3},
+    "tags": ["Trade Moguls", "Economy"],
+    "effect_text": "Gain 4 Metals and 2 Energy. Draw 1 card.",
+    "flavor_text": "Profits flow where the stars align.",
+    "stats": null,
+    "power_rating": 2,
+    "image": "/tradeRoute.jpg"
+  },
+  {
+    "name": "Harvester Drone",
+    "type": "Military Unit",
+    "cost": {"Energy": 2, "Organics": 1},
+    "tags": ["Resource Harvesters", "Support"],
+    "effect_text": "Deploy to a fleet. This unit produces 1 Data per turn.",
+    "flavor_text": "A tireless worker of the cosmic fields.",
+    "stats": {"Attack": 1, "Defense": 2},
+    "power_rating": 2,
+    "image": "/harvesterDrone.jpg"
+  },
+  {
+    "name": "Alien Ally",
+    "type": "Ally",
+    "cost": {"Data": 3, "Organics": 2},
+    "tags": ["Hybrid Nomads", "Support"],
+    "effect_text": "Add a 2/2 unit to your fleet until end of turn. Discard after use.",
+    "flavor_text": "A strange bond forged in the stars.",
+    "stats": null,
+    "power_rating": 3,
+    "image": "/alienAlly.jpg"
+  },
+  {
+    "name": "Cloaking Field",
+    "type": "Action",
+    "cost": {"Energy": 3, "Data": 1},
+    "tags": ["Scout Pioneers", "Tactic"],
+    "effect_text": "Target fleet cannot be attacked this turn. Discard after use.",
+    "flavor_text": "Vanishing into the shadows of space.",
+    "stats": null,
+    "power_rating": 3
+  },
+  {
+    "name": "Dreadnought",
+    "type": "Military Unit",
+    "cost": {"Energy": 6, "Metals": 3},
+    "tags": ["Warrior Clans", "Elite"],
+    "effect_text": "Deploy to a fleet. Destroy one enemy unit with Defense 4 or less when played.",
+    "flavor_text": "A fortress that crushes all opposition.",
+    "stats": {"Attack": 5, "Defense": 5},
+    "power_rating": 5
+  },
+  {
+    "name": "Resource Surge",
+    "type": "Event",
+    "cost": {"Organics": 2},
+    "tags": ["Resource Harvesters", "Economy"],
+    "effect_text": "Gain 3 of each resource type (Energy, Metals, Organics, Data).",
+    "flavor_text": "The galaxy yields its bounty to the prepared.",
+    "stats": null,
+    "power_rating": 4
+  }
+]
