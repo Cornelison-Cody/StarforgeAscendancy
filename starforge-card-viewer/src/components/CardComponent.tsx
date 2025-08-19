@@ -1,4 +1,8 @@
 
+
+import PowerIcon from "./PowerIcon";
+import AttackIcon from "./AttackIcon";
+import DefenseIcon from "./DefenseIcon";
 import type { Card } from "../types/Card";
 
 interface CardComponentProps {
@@ -18,6 +22,7 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
 
   return (
     <div
+      className="card-print-size"
       style={{
         fontFamily: 'Orbitron, "Segoe UI", Arial, sans-serif',
         border: `3px solid ${borderColor}`,
@@ -46,32 +51,50 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
         borderBottom: `2px solid ${borderColor}`,
         display: "flex",
         alignItems: "center",
-        justifyContent: "flex-start"
+        justifyContent: "space-between",
+        gap: 12
       }}>
-        <span style={{ fontWeight: 700, fontSize: 18, letterSpacing: 1 }}>{card.name}</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <span style={{ position: 'relative', top: '-1px', left: '-10px' }}>
+            <PowerIcon value={card.power_rating} />
+          </span>
+          <span style={{ fontWeight: 700, fontSize: 18, letterSpacing: 1 }}>{card.name}</span>
+        </div>
+        {card.stats && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginRight: 5 }}>
+            <AttackIcon value={card.stats.Attack} />
+            <DefenseIcon value={card.stats.Defense} />
+          </div>
+        )}
       </div>
 
       {/* Art Section */}
       <div style={{
-        flex: 1,
+        width: '100%',
+        flex: '0 0 280px',
         background: "radial-gradient(ellipse at 60% 40%, #2ec4ff22 0%, #232942 80%)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: 60,
-        minWidth: 60,
-        overflow: "hidden"
+        overflow: "hidden",
+        position: 'relative',
+        minHeight: 0,
+        minWidth: 0
       }}>
         {card.image ? (
           <img
             src={card.image}
             alt={card.name}
             style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
-              objectFit: "cover",
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              aspectRatio: '1 / 1',
               borderRadius: 12,
-              boxShadow: "0 2px 8px #000a"
+              boxShadow: "0 2px 8px #000a",
+              position: 'absolute',
+              top: 0,
+              left: 0
             }}
           />
         ) : (
@@ -86,22 +109,15 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
         borderTop: `2px solid ${borderColor}`,
         display: "flex",
         flexDirection: "column",
-        gap: 4
+        gap: 4,
+        flex: 1,
+        minHeight: 0,
+        overflowY: 'auto'
       }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div style={{ fontSize: 13, color: "#ffe156", fontWeight: 600 }}>
-            Cost: {Object.entries(card.cost).map(([k, v]) => `${k[0]}:${v}`).join(" ")}
-          </div>
-          <div style={{ fontSize: 13, color: "#43d675", fontWeight: 600 }}>
-            Power: {card.power_rating}
-          </div>
+        <div style={{ fontSize: 13, color: "#ffe156", fontWeight: 600, marginBottom: 4 }}>
+          Cost: {Object.entries(card.cost).map(([k, v]) => `${k[0]}:${v}`).join(" ")}
         </div>
-        {card.stats && (
-          <div style={{ display: "flex", gap: 8, margin: "4px 0" }}>
-            <span style={{ background: "#2ec4ff33", borderRadius: 6, padding: "2px 8px", fontWeight: 700, color: "#2ec4ff" }}>ATK {card.stats.Attack}</span>
-            <span style={{ background: "#ffe15633", borderRadius: 6, padding: "2px 8px", fontWeight: 700, color: "#ffe156" }}>DEF {card.stats.Defense}</span>
-          </div>
-        )}
+        {/* ...existing code... (removed ATK/DEF icons from stats area) */}
         <div style={{ fontSize: 12, color: "#b0b0b0", margin: "2px 0" }}>
           Tags: {card.tags.join(", ")}
         </div>

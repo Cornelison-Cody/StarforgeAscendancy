@@ -14,7 +14,6 @@ function App() {
 
   return (
     <div style={{ background: "#10131a", minHeight: "100vh", padding: 32 }}>
-      <h1 style={{ color: "#ffd700", textAlign: "center" }}>Starforge Ascendancy Card Viewer</h1>
       <div style={{
         display: "flex",
         flexWrap: "wrap",

@@ -1,3 +1,27 @@
+@media print {
+  .card-print-size {
+    width: 2.5in !important;
+    height: 3.5in !important;
+    min-width: 2.5in !important;
+    min-height: 3.5in !important;
+    max-width: 2.5in !important;
+    max-height: 3.5in !important;
+    box-sizing: border-box;
+    page-break-inside: avoid;
+  }
+}
+
+@media print {
+
+  body,
+  #root {
+    background: #10131a !important;
+    color: #eaf6fb !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -11,9 +35,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,16 +48,20 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+
+body,
+#root {
+  background: #10131a !important;
+  color: #eaf6fb !important;
 }
+
+/* Remove any system theme checks and force dark theme */
 
 .card {
   padding: 2em;
