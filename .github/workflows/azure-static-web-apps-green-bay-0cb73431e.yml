@@ -23,12 +23,6 @@ jobs:
           submodules: true
           lfs: false
 
-      # <-- NEW: Setup Node 20 -->
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20.19.0
-
       - name: Install OIDC Client from Core Package
         run: npm install @actions/core@1.6.0 @actions/http-client
 
@@ -56,7 +50,6 @@ jobs:
           api_location: "./api"          # API source code path
           output_location: "build"       # Built app content directory
           github_id_token: ${{ steps.idtoken.outputs.result }}
-          app_build_command: 'nvm install 20.19.0 && nvm use 20.19.0 && npm run build'
           ###### End of Config ######
 
   close_pull_request_job:
