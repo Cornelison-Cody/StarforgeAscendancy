@@ -56,6 +56,7 @@ jobs:
           api_location: "./api"          # API source code path
           output_location: "build"       # Built app content directory
           github_id_token: ${{ steps.idtoken.outputs.result }}
+          app_build_command: 'nvm install 20.19.0 && nvm use 20.19.0 && npm run build'
           ###### End of Config ######
 
   close_pull_request_job:
