@@ -6,7 +6,7 @@ import type { Card } from "./types/Card";
 function App() {
   const [cards, setCards] = useState<Card[]>([]);
   useEffect(() => {
-    fetch("/db/cards")
+    fetch("/data-api/db/cards")
       .then((res) => res.json())
       .then((data) => setCards(data.value || []))
       .catch(() => setCards([]));
