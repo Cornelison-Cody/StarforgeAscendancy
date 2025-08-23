@@ -6,9 +6,9 @@ import type { Card } from "./types/Card";
 function App() {
   const [cards, setCards] = useState<Card[]>([]);
   useEffect(() => {
-    fetch("/src/db/cards.json")
+    fetch("/db/cards")
       .then((res) => res.json())
-      .then(setCards)
+      .then((data) => setCards(data.value || []))
       .catch(() => setCards([]));
   }, []);
 

@@ -46,9 +46,10 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GREEN_BAY_0CB73431E }}
           action: "upload"
           ###### Repository/Build Configurations ######
-          app_location: "./sa-card-app" # App source code path
-          api_location: "./api"          # API source code path
-          output_location: "dist"       # Built app content directory
+          app_location: "/src" # App source code path
+          api_location: "api"          # API source code path
+          output_location: "/dist"       # Built app content directory
+          data_api_location: "swa-db-connections" # Data API source code path
           github_id_token: ${{ steps.idtoken.outputs.result }}
           ###### End of Config ######
 
