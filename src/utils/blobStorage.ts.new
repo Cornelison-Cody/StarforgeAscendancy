@@ -1,0 +1,48 @@
+// Generate a SAS token from Azure Portal with these permissions:
+// - Read
+// - Add
+// - Create
+// - Write
+// - Delete
+// - List
+const sasToken = "?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2024-08-24T05:28:33Z&st=2023-08-23T21:28:33Z&spr=https&sig=VQedhxv%2FnDMb6WiaoX%2FtiF03j%2FEBbS4JlA7GaPEsaEI%3D";
+
+// Storage account configuration
+const accountName = "sacardimages";
+const containerName = "card-images";
+
+export async function uploadImageToBlob(file: File): Promise<string> {
+    try {
+        // Generate a unique blob name
+        const blobName = `${Date.now()}-${file.name}`;
+        
+        // Create URLs for upload (with SAS) and public access
+        const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${sasToken}`;
+        const publicUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}`;
+
+        console.log('Uploading to:', uploadUrl);
+        
+        // Upload the file using fetch
+        const response = await fetch(uploadUrl, {
+            method: 'PUT',
+            headers: {
+                'x-ms-blob-type': 'BlockBlob',
+                'Content-Type': file.type
+            },
+            body: file  // Send the file directly
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Upload response:', response.status, errorText);
+            throw new Error(`Upload failed: ${response.statusText}`);
+        }
+
+        console.log('Upload successful');
+        // Return the public URL (without SAS token)
+        return publicUrl;
+    } catch (error) {
+        console.error('Error uploading to blob storage:', error);
+        throw new Error('Failed to upload image');
+    }
+}

@@ -1,4 +1,5 @@
 export type Card = {
+  id?: string;
   name: string;
   type: string;
   cost: Record<string, number>;

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Card } from '../types/Card';
+import { uploadImageToBlob } from '../utils/blobStorage';
 
 interface EditCardFormProps {
     card: Card;
@@ -11,6 +12,25 @@ interface EditCardFormProps {
 const EditCardForm: React.FC<EditCardFormProps> = ({ card, onSave, onCancel, onDelete }) => {
     const [editedCard, setEditedCard] = useState<Card>({ ...card });
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const [uploading, setUploading] = useState(false);
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        console.log('Starting image upload:', { fileName: file.name, fileSize: file.size });
+        setUploading(true);
+        try {
+            const url = await uploadImageToBlob(file);
+            console.log('Upload successful, image URL:', url);
+            setEditedCard(prev => ({ ...prev, image: url }));
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            alert('Failed to upload image. Please try again.');
+        } finally {
+            setUploading(false);
+        }
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -118,6 +138,40 @@ const EditCardForm: React.FC<EditCardFormProps> = ({ card, onSave, onCancel, onD
                         </div>
                     </>
                 )}
+                <div style={{ marginBottom: '15px' }}>
+                    <label>
+                        Card Image:
+                        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageUpload}
+                                style={{
+                                    width: '100%',
+                                    padding: '8px',
+                                    marginTop: '5px',
+                                    background: '#10131a',
+                                    color: 'white',
+                                    border: '1px solid #444'
+                                }}
+                            />
+                            {uploading && <span>Uploading...</span>}
+                        </div>
+                        {editedCard.image && (
+                            <div style={{ marginTop: '10px' }}>
+                                <img
+                                    src={editedCard.image}
+                                    alt="Card Preview"
+                                    style={{
+                                        maxWidth: '200px',
+                                        border: '1px solid #444',
+                                        borderRadius: '4px'
+                                    }}
+                                />
+                            </div>
+                        )}
+                    </label>
+                </div>
                 <div style={{ display: 'flex', gap: '10px', justifyContent: 'space-between', alignItems: 'center' }}>
                     {card.name && onDelete && (
                         <button
