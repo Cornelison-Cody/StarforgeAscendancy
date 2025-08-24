@@ -32,8 +32,12 @@ function App() {
   };
 
   const handleDeleteCard = async (cardToDelete: Card) => {
+    if (!cardToDelete?.id) {
+      console.error("Card ID is missing");
+      return;
+    }
     try {
-      const response = await fetch(`/api/cards?name=${encodeURIComponent(cardToDelete.name)}`, {
+      const response = await fetch(`/api/cards?id=${encodeURIComponent(cardToDelete?.id)}`, {
         method: "DELETE",
       });
 
@@ -50,13 +54,17 @@ function App() {
 
   const handleSaveCard = async (cardToSave: Card) => {
     try {
+      console.log('Saving card:', cardToSave);
       const isNewCard = !cards.some(c => c.name === cardToSave.name);
       const response = await fetch("/api/cards", {
         method: isNewCard ? "POST" : "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(cardToSave),
+        body: JSON.stringify({
+          ...cardToSave,
+          image: cardToSave.image || undefined // Only include image if it exists
+        }),
       });
 
       if (!response.ok) {

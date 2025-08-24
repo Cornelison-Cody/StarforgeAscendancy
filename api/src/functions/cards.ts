@@ -88,20 +88,20 @@ export async function cards(request: HttpRequest, context: InvocationContext): P
 
         // Handle DELETE request
         if (request.method === 'DELETE') {
-            const cardName = request.query.get('name');
+            const cardId = request.query.get('id');
 
-            if (!cardName) {
+            if (!cardId) {
                 return {
                     status: 400,
-                    jsonBody: { error: 'Card name is required' }
+                    jsonBody: { error: 'Card ID is required' }
                 };
             }
 
-            // Find the card by name
+            // Find the card by ID
             const { resources: existingCards } = await container.items
                 .query({
-                    query: "SELECT * FROM c WHERE c.name = @name",
-                    parameters: [{ name: "@name", value: cardName }]
+                    query: "SELECT * FROM c WHERE c.id = @id",
+                    parameters: [{ name: "@id", value: cardId }]
                 })
                 .fetchAll();
 
@@ -114,6 +114,7 @@ export async function cards(request: HttpRequest, context: InvocationContext): P
 
             // Delete the card
             const cardToDelete = existingCards[0];
+            context.info('Deleting card:', cardToDelete);
 
             // In Cosmos DB, we need both the id and partition key
             if (!cardToDelete.id) {
@@ -124,7 +125,7 @@ export async function cards(request: HttpRequest, context: InvocationContext): P
             }
 
             try {
-                await container.item(cardToDelete.id).delete();
+                await container.item(cardToDelete.id, cardToDelete.id).delete();
                 return {
                     status: 200,
                     jsonBody: { message: 'Card deleted successfully' }
