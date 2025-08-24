@@ -1,3 +1,0 @@
-type cards @model {
-  id: ID
-}
