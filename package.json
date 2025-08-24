@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "start:swa": "swa start --data-api-location ./swa-db-connections "
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^19.1.1",

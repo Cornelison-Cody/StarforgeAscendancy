@@ -7,6 +7,7 @@ import type { Card } from "../types/Card";
 
 interface CardComponentProps {
   card: Card;
+  onCardClick: (card: Card) => void;
 }
 
 const cardTypeColors: Record<string, string> = {
@@ -17,13 +18,15 @@ const cardTypeColors: Record<string, string> = {
   "Ally": "#b388ff"
 };
 
-const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
+const CardComponent: React.FC<CardComponentProps> = ({ card, onCardClick }) => {
   const borderColor = cardTypeColors[card.type] || "#fff";
 
   return (
     <div
       className="card-print-size"
+      onClick={() => onCardClick(card)}
       style={{
+        cursor: 'pointer',
         fontFamily: 'Orbitron, "Segoe UI", Arial, sans-serif',
         border: `3px solid ${borderColor}`,
         borderRadius: 18,
